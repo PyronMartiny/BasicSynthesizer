@@ -1,0 +1,5 @@
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\BasicSynthesizer.csproj.AssemblyReference.cache
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\BasicSynthesizer.BasicSynthesizer.resources
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\BasicSynthesizer.Properties.Resources.resources
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\BasicSynthesizer.csproj.GenerateResource.cache
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\BasicSynthesizer.csproj.CoreCompileInputs.cache
