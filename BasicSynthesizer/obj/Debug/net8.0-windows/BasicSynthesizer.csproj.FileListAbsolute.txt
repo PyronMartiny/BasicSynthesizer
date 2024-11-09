@@ -1,0 +1,17 @@
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\bin\Debug\net8.0-windows\BasicSynthesizer.exe
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\bin\Debug\net8.0-windows\BasicSynthesizer.deps.json
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\bin\Debug\net8.0-windows\BasicSynthesizer.runtimeconfig.json
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\bin\Debug\net8.0-windows\BasicSynthesizer.dll
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\bin\Debug\net8.0-windows\BasicSynthesizer.pdb
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\net8.0-windows\BasicSynthesizer.BasicSynthesizer.resources
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\net8.0-windows\BasicSynthesizer.csproj.GenerateResource.cache
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\net8.0-windows\BasicSynthesizer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\net8.0-windows\BasicSynthesizer.AssemblyInfoInputs.cache
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\net8.0-windows\BasicSynthesizer.AssemblyInfo.cs
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\net8.0-windows\BasicSynthesizer.csproj.CoreCompileInputs.cache
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\net8.0-windows\BasicSynthesizer.sourcelink.json
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\net8.0-windows\BasicSynthesizer.dll
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\net8.0-windows\refint\BasicSynthesizer.dll
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\net8.0-windows\BasicSynthesizer.pdb
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\net8.0-windows\BasicSynthesizer.genruntimeconfig.cache
+C:\Users\kyron\source\repos\BasicSynthesizer\BasicSynthesizer\obj\Debug\net8.0-windows\ref\BasicSynthesizer.dll
