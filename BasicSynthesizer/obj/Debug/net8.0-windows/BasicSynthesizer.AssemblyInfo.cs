@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BasicSynthesizer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f636194baa5a153a9c32c80c8d8e74772dac3ac1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f4410d56020f59fc77f80dff9b4f6ad399b7d1fa")]
 [assembly: System.Reflection.AssemblyProductAttribute("BasicSynthesizer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BasicSynthesizer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

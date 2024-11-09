@@ -16,7 +16,7 @@ namespace BasicSynthesizer
         {
             short[] wave = new short[SAMPLE_RATE];
             byte[] binaryWave = new byte[SAMPLE_RATE * sizeof(short)];
-            float frequency = 1000f;
+            float frequency = 250f;
             for (int i = 0; i < SAMPLE_RATE; i++)
             {
                 wave[i] = Convert.ToInt16((short.MaxValue * 1) * Math.Sin((Math.PI * 2 * frequency / SAMPLE_RATE) * i));
@@ -43,6 +43,11 @@ namespace BasicSynthesizer
                 memoryStream.Position = 0;
                 new SoundPlayer(memoryStream).Play();
             }
+        }
+
+        private void oscillator1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

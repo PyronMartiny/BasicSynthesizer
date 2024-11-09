@@ -4,5 +4,8 @@
     <Compile Update="BasicSynthesizer.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Oscillator.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

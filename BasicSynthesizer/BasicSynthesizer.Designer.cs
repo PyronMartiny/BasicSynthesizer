@@ -28,13 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            oscillator1 = new Oscillator();
             SuspendLayout();
+            // 
+            // oscillator1
+            // 
+            oscillator1.Location = new Point(12, 12);
+            oscillator1.Name = "oscillator1";
+            oscillator1.Size = new Size(200, 100);
+            oscillator1.TabIndex = 0;
+            oscillator1.TabStop = false;
+            oscillator1.Text = "oscillator1";
             // 
             // BasicSynthesizer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(453, 403);
+            Controls.Add(oscillator1);
             KeyPreview = true;
             Name = "BasicSynthesizer";
             Text = "BasicSynthesizer";
@@ -43,5 +54,7 @@
         }
 
         #endregion
+
+        private Oscillator oscillator1;
     }
 }
