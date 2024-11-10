@@ -3,6 +3,9 @@
     public class Oscillator : GroupBox
     {
         public TrackBar FrequencyOffsetTrackbar { get; private set; }
+        public ComboBox OctaveSelector { get; private set; }
+        public TrackBar AmplitudeTrackBar { get; private set; }
+        public float Amplitude { get; private set; } = 1.0f;
         public Oscillator()
         {
             this.Controls.Add(new Button()
@@ -10,7 +13,7 @@
                 Name = "Sine",
                 Location = new Point(10, 15),
                 Text = "Sine",
-                BackColor = Color.Yellow
+                BackColor = Color.LightSkyBlue
             });
             this.Controls.Add(new Button()
             {
@@ -36,6 +39,24 @@
                 Location = new Point(65, 50),
                 Text = "Noise",
             });
+
+            AmplitudeTrackBar = new TrackBar()
+            {
+                Name = "AmplitudeTrackBar",
+                Location = new Point(210, 50),
+                Size = new Size(90, 30),
+                Minimum = 0,
+                Maximum = 100,
+                Value = 75,
+                TickFrequency = 20,
+                AutoSize = false
+            };
+            AmplitudeTrackBar.ValueChanged += (sender, e) =>
+            {
+                Amplitude = AmplitudeTrackBar.Value / 100.0f;
+            };
+            this.Controls.Add(AmplitudeTrackBar);
+
             foreach (Control control in this.Controls)
             {
                 if (control is Button)
@@ -62,10 +83,25 @@
                 Maximum = 7,
                 Value = 0,
                 TickFrequency = 2,
+                LargeChange = 1,
+                SmallChange = 1,
                 Orientation = Orientation.Vertical,
                 AutoSize = false
             };
             this.Controls.Add(FrequencyOffsetTrackbar);
+
+            OctaveSelector = new ComboBox()
+            {
+                Name = "OctaveSelector",
+                Location = new Point(270, 16),
+                Size = new Size(50, 20),
+                Items = { "1", "0", "-1" },
+                SelectedIndex = 1,
+                DropDownStyle = ComboBoxStyle.DropDownList,
+            };
+
+            this.Controls.Add(OctaveSelector);
+
             foreach (Control control in this.Controls)
             {
                 if (control is not TrackBar)
@@ -81,6 +117,20 @@
 
         public float FrequencyOffset => FrequencyOffsetTrackbar.Value * 1.0f;
 
+        public int SelectedOctave
+        {
+            get
+            {
+
+
+                if (OctaveSelector?.SelectedItem == null)
+                {
+                    return 0;
+                }
+                return int.Parse(OctaveSelector.SelectedItem.ToString());
+            }
+        }
+
         private void WaveButton_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
@@ -89,7 +139,7 @@
             {
                 otherButtons.UseVisualStyleBackColor = true;
             }
-            button.BackColor = Color.Yellow;
+            button.BackColor = Color.LightSkyBlue;
         }
     }
 }

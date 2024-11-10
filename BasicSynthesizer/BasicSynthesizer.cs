@@ -23,57 +23,67 @@ namespace BasicSynthesizer
             switch (e.KeyCode)
             {
                 case Keys.A:
-                    frequency = 130.81f / 2; // C3
+                    frequency = 130.81f; // C3
                     break;
                 case Keys.W:
-                    frequency = 138.59f / 2; // C#3 / Db3
+                    frequency = 138.59f; // C#3 / Db3
                     break;
                 case Keys.S:
-                    frequency = 146.83f / 2; // D3
+                    frequency = 146.83f; // D3
                     break;
                 case Keys.E:
-                    frequency = 155.56f / 2; // D#3 / Eb3
+                    frequency = 155.56f; // D#3 / Eb3
                     break;
                 case Keys.D:
-                    frequency = 164.81f / 2; // E3
+                    frequency = 164.81f; // E3
                     break;
                 case Keys.F:
-                    frequency = 174.61f / 2; // F3
+                    frequency = 174.61f; // F3
                     break;
                 case Keys.T:
-                    frequency = 185.00f / 2; // F#3 / Gb3
+                    frequency = 185.00f; // F#3 / Gb3
                     break;
                 case Keys.G:
-                    frequency = 196.00f / 2; // G3
+                    frequency = 196.00f; // G3
                     break;
                 case Keys.Y:
-                    frequency = 207.65f / 2; // G#3 / Ab3
+                    frequency = 207.65f; // G#3 / Ab3
                     break;
                 case Keys.H:
-                    frequency = 220.00f / 2; // A3
+                    frequency = 220.00f; // A3
                     break;
                 case Keys.U:
-                    frequency = 233.08f / 2; // A#3 / Bb3
+                    frequency = 233.08f; // A#3 / Bb3
                     break;
                 case Keys.J:
-                    frequency = 246.94f / 2; // B3
+                    frequency = 246.94f; // B3
                     break;
                 case Keys.K:
-                    frequency = 261.63f / 2; // C4 (Middle C)
+                    frequency = 261.63f; // C4 (Middle C)
                     break;
                 case Keys.L:
-                    frequency = 277.18f / 2; // C#4 / Db4
+                    frequency = 277.18f; // C#4 / Db4
                     break;
                 case Keys.OemSemicolon: // ';' key
-                    frequency = 293.66f / 2; // D4
+                    frequency = 293.66f; // D4
                     break;
                 case Keys.OemQuotes: // '\'' key (single quote)
-                    frequency = 311.13f / 2; // D#4 / Eb4
+                    frequency = 311.13f; // D#4 / Eb4
                     break;
                 default:
                     return;
             }
+            foreach (var oscillator in oscillators)
+            {
+                if (oscillator.OctaveSelector != null && oscillator.OctaveSelector.SelectedItem != null)
+                {
+                    int octaveAdjustment = oscillator.SelectedOctave;
+                    frequency *= (float)Math.Pow(2, octaveAdjustment);
+                }
 
+                if (!oscillator.On || oscillator.Amplitude == 0)  // Skip muted or off oscillators
+                    continue;
+            }
 
             foreach (Oscillator oscillator in oscillators)
             {
@@ -84,19 +94,20 @@ namespace BasicSynthesizer
                 int samplesPerWaveLength = (int)(SAMPLE_RATE / adjustedFrequency);
                 short ampStep = (short)((short.MaxValue * 2) / samplesPerWaveLength);
                 short tempSample;
+                float oscillatorAmplitude = oscillator.Amplitude;
 
                 switch (oscillator.Waveform)
                 {
                     case Waveform.Sine:
                         for (int i = 0; i < SAMPLE_RATE; i++)
                         {
-                            wave[i] += Convert.ToInt16((short.MaxValue * 1 * Math.Sin(((Math.PI * 2 * adjustedFrequency) / SAMPLE_RATE) * i + phaseOffset)) / oscillatorsCount);
+                            wave[i] += Convert.ToInt16((short.MaxValue * oscillatorAmplitude * Math.Sin(((Math.PI * 2 * adjustedFrequency) / SAMPLE_RATE) * i + phaseOffset)) / oscillatorsCount);
                         }
                         break;
                     case Waveform.Square:
                         for (int i = 0; i < SAMPLE_RATE; i++)
                         {
-                            wave[i] += Convert.ToInt16((short.MaxValue * Math.Sign(Math.Sin((Math.PI * 2 * adjustedFrequency) / SAMPLE_RATE * i + phaseOffset))) / oscillatorsCount);
+                            wave[i] += Convert.ToInt16((short.MaxValue * oscillatorAmplitude * Math.Sign(Math.Sin((Math.PI * 2 * adjustedFrequency) / SAMPLE_RATE * i + phaseOffset))) / oscillatorsCount);
                         }
                         break;
                     case Waveform.Saw:
@@ -105,7 +116,7 @@ namespace BasicSynthesizer
                             float phase = (float)((i + (phaseOffset * (samplesPerWaveLength / (2 * Math.PI)))) % samplesPerWaveLength);
                             phase /= samplesPerWaveLength;
                             tempSample = (short)(short.MaxValue * (2 * phase - 1));
-                            wave[i] += Convert.ToInt16(tempSample / oscillatorsCount);
+                            wave[i] += Convert.ToInt16(tempSample * oscillatorAmplitude / oscillatorsCount);
                         }
                         break;
                     case Waveform.Triangle:
@@ -117,14 +128,14 @@ namespace BasicSynthesizer
                                 ampStep = (short)-ampStep;
                             }
                             tempSample += ampStep;
-                            wave[i] += Convert.ToInt16(tempSample / oscillatorsCount);
+                            wave[i] += Convert.ToInt16(tempSample * oscillatorAmplitude / oscillatorsCount);
                         }
                         break;
                     case Waveform.Noise:
                         Random noiserandom = new Random();
                         for (int i = 0; i < SAMPLE_RATE; i++)
                         {
-                            wave[i] += Convert.ToInt16(noiserandom.Next(-short.MaxValue, short.MaxValue) / oscillatorsCount);
+                            wave[i] += Convert.ToInt16(noiserandom.Next(-short.MaxValue, short.MaxValue) * (oscillatorAmplitude * 0.5f));
                         }
                         break;
 
