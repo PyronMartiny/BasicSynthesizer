@@ -1,5 +1,4 @@
 using System.Media;
-using System.Windows.Forms;
 
 namespace BasicSynthesizer
 {
@@ -15,10 +14,12 @@ namespace BasicSynthesizer
 
         private void BasicSynthesizer_KeyDown(object sender, KeyEventArgs e)
         {
+            IEnumerable<Oscillator> oscillators = this.Controls.OfType<Oscillator>().Where(o => o.On);
             short[] wave = new short[SAMPLE_RATE];
             byte[] binaryWave = new byte[SAMPLE_RATE * sizeof(short)];
             float frequency;
-            
+            int oscillatorsCount = oscillators.Count();
+
             switch (e.KeyCode)
             {
                 case Keys.A:
@@ -73,7 +74,7 @@ namespace BasicSynthesizer
                     return;
             }
 
-            foreach (Oscillator oscillator in this.Controls.OfType<Oscillator>())
+            foreach (Oscillator oscillator in oscillators)
             {
                 int samplesPerWaveLength = (int)(SAMPLE_RATE / frequency);
                 short ampStep = (short)((short.MaxValue * 2) / samplesPerWaveLength);
@@ -83,13 +84,13 @@ namespace BasicSynthesizer
                     case Waveform.Sine:
                         for (int i = 0; i < SAMPLE_RATE; i++)
                         {
-                            wave[i] = Convert.ToInt16((short.MaxValue * 1) * Math.Sin((Math.PI * 2 * frequency / SAMPLE_RATE) * i));
+                            wave[i] += Convert.ToInt16((short.MaxValue * 1 * Math.Sin(((Math.PI * 2 * frequency) / SAMPLE_RATE) * i)) / oscillatorsCount);
                         }
                         break;
                     case Waveform.Square:
                         for (int i = 0; i < SAMPLE_RATE; i++)
                         {
-                            wave[i] = Convert.ToInt16(short.MaxValue * Math.Sign(Math.Sin((Math.PI * 2 * frequency) / SAMPLE_RATE * i)));
+                            wave[i] += Convert.ToInt16((short.MaxValue * Math.Sign(Math.Sin((Math.PI * 2 * frequency) / SAMPLE_RATE * i))) / oscillatorsCount);
                         }
                         break;
                     case Waveform.Saw:
@@ -99,7 +100,7 @@ namespace BasicSynthesizer
                             for (int j = 0; j < samplesPerWaveLength && i < SAMPLE_RATE; j++)
                             {
                                 tempSample += ampStep;
-                                wave[i++] = Convert.ToInt16(tempSample);
+                                wave[i++] += Convert.ToInt16(tempSample / oscillatorsCount);
                             }
                             i--;
                         }
@@ -111,16 +112,16 @@ namespace BasicSynthesizer
                             if (Math.Abs(tempSample + ampStep) > short.MaxValue)
                             {
                                 ampStep = (short)-ampStep;
-                            }   
+                            }
                             tempSample += ampStep;
-                            wave[i] = Convert.ToInt16(tempSample);
+                            wave[i] += Convert.ToInt16(tempSample / oscillatorsCount);
                         }
                         break;
                     case Waveform.Noise:
                         Random random = new Random();
                         for (int i = 0; i < SAMPLE_RATE; i++)
                         {
-                        wave[i] = (short)random.Next(-short.MaxValue, short.MaxValue);
+                            wave[i] += Convert.ToInt16(random.Next(-short.MaxValue, short.MaxValue) / oscillatorsCount);
                         }
                         break;
 
@@ -152,6 +153,11 @@ namespace BasicSynthesizer
         }
 
         private void oscillator1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void oscillator3_Enter(object sender, EventArgs e)
         {
 
         }
