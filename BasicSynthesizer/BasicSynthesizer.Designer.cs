@@ -41,6 +41,7 @@
             oscillator1.TabIndex = 0;
             oscillator1.TabStop = false;
             oscillator1.Text = "oscillator1";
+            oscillator1.Enter += oscillator1_Enter_1;
             // 
             // oscillator3
             // 
