@@ -79,12 +79,12 @@
                 Name = "FrequencyOffsetTrackBar",
                 Location = new Point(382, 16),
                 Size = new Size(40, 80),
-                Minimum = -7,
-                Maximum = 7,
+                Minimum = -50,
+                Maximum = 50,
                 Value = 0,
-                TickFrequency = 2,
-                LargeChange = 1,
-                SmallChange = 1,
+                TickFrequency = 0,
+                LargeChange = 0,
+                SmallChange = 0,
                 Orientation = Orientation.Vertical,
                 AutoSize = false
             };
@@ -115,7 +115,7 @@
         public Waveform Waveform { get; private set; }
         public bool On => ((CheckBox)this.Controls["OscillatorOn"]).Checked;
 
-        public float FrequencyOffset => FrequencyOffsetTrackbar.Value * 1.0f;
+        public float FrequencyOffset => FrequencyOffsetTrackbar.Value * 0.1f;
 
         public int SelectedOctave
         {
